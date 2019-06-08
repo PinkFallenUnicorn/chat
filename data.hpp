@@ -9,8 +9,13 @@ class Data
 {
     private:
     public:
+        static uint64_t next_chat_id;
+        static uint32_t next_user_id;
         static std::string filepath;
-        static int32_t data_init();
+        static uint32_t data_init();
+        static uint32_t first_data_init();
+        static uint32_t rewrite_next_id();
+
 };
 
 

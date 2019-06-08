@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-struct message;
+#include "data.hpp"
+
 
 class Chat
 {
@@ -22,6 +23,8 @@ class Chat
             { std::cout << "sender id: " << sender_id << '\n' << "receiver id: " << receiver_id << '\n' << "message: " << msg << '\n'; }
 
         };
+
+        Chat( );
 
     private:
         const uint32_t user1_id;

@@ -15,9 +15,6 @@ int error(const char *msg)
 
 int main()
 {
-    system("mkdir users");
-    system("mkdir chats");
-
     int32_t sock, listener;
     sockaddr_in addr;
     message msgbuf;
@@ -53,12 +50,8 @@ int main()
             {
                 bytes_read = recv(sock, buf, 1024, 0);
                 if (bytes_read <= 0 ) break;
-                send();
             }
-
         }
-
-
     }
 
 

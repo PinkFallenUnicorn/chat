@@ -11,23 +11,19 @@
 class User
 {
     private:
-        static uint32_t next_id;
-        
+        uint32_t add_user_file();    
     public:
         std::string nickname;
         std::string password;
         const uint32_t id;
 
-        static uint32_t user_init();
-        static uint32_t rewrite_next_id();
-
         User(std::string nickname, std::string password) : 
-        id(next_id), nickname(nickname), password(password)
+        id(Data::next_user_id), nickname(nickname), password(password)
         { 
-            next_id += 1; 
-            rewrite_next_id();
+            add_user_file();
+            Data::next_user_id += 1; 
+            Data::rewrite_next_id();
         }
-
 };
 
 

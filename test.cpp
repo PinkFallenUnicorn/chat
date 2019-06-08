@@ -4,9 +4,13 @@
 
 int main()
 {
+    Data::first_data_init();
     Data::data_init();
-    User::user_init();
-    User a{"asdasd", "idasjijaisj"};
+    User asada {"oasodjaosd", "assadsaddas"};
+    User aasdsada {"oasosdjaosd", "assadsaddas"};
+    User asafda {"oasodjao1sd", "assadsaddas"};
+    User asddada {"oasodjasosd", "assadsaddas"};
+    User asasdada {"oagsodjaosd", "assadsaddas"};
 
     return 0;
 }

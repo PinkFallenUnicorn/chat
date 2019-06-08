@@ -1,33 +1,25 @@
 #include "user.hpp"
 
-
-uint32_t User::next_id = 0;
-
-
-uint32_t User::user_init()
+uint32_t User::add_user_file()
 {
-    std::ifstream file;
-    file.open(Data::filepath);
+    const std::string filepath = "users/" + std::to_string(id);
+    std::cout << id << '\n';
+    const std::string command = "touch " + filepath;
+    const char *comm = command.c_str();
+    std::cout << command << '\n';
 
-    if (!file.is_open()) {perror("open next_id"); exit(0);}
+    system(comm);
 
-
-    file >> next_id;
-           
-    file.close();
-    return 0;
-}
-
-
-uint32_t User::rewrite_next_id()
-{
     std::ofstream file;
-    file.open(Data::filepath);
+    file.open(filepath);
+    
+    std::string errortext = "error open user file user_id: " + std::to_string(id);
+    const char *errtext = errortext.c_str();
+    if (!file.is_open()) {perror(errtext); exit(0);}
 
-    if (!file.is_open()) {perror("open next_id"); exit(0);}
-
-    file << next_id;
-
+    else 
+    { file << nickname << '\n' << password << '\n';}
     file.close();
+    
     return 0;
 }
