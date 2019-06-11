@@ -6,6 +6,7 @@ uint64_t Data::next_chat_id = 0;
 uint32_t Data::next_user_id = 0;
 
 
+
 uint32_t Data::first_data_init()
 {
     system("rm -rf data");
@@ -19,7 +20,8 @@ uint32_t Data::first_data_init()
     std::ofstream file;
     file.open("data/next_id");
 
-    if (!file.is_open()) {perror("open data/next_id"); exit(0);}
+    if (!file.is_open()) {perror("open data/next_id"); exit(0); }
+    
     else 
     { file << "1\n1\n";}
     file.close();
@@ -45,6 +47,7 @@ uint32_t Data::data_init()
 
     return 0;
 }
+
 
 
 uint32_t Data::rewrite_next_id()

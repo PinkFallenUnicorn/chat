@@ -17,6 +17,8 @@ class User
         std::string password;
         const uint32_t id;
 
+        static uint32_t add_chat(uint32_t user_id, uint64_t chat_id);
+
         User(std::string nickname, std::string password) : 
         id(Data::next_user_id), nickname(nickname), password(password)
         { 

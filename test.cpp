@@ -11,6 +11,7 @@ int main()
     User asafda {"oasodjao1sd", "assadsaddas"};
     User asddada {"oasodjasosd", "assadsaddas"};
     User asasdada {"oagsodjaosd", "assadsaddas"};
-
+    Chat newchat {asada.id, aasdsada.id};
+    Chat::message msg {newchat, newchat.user1_id, newchat.user2_id, "ojsadajsdojasodjaosjdosajdoajodojsvbasdhosjdaosdhbfjiabds"};
     return 0;
 }
