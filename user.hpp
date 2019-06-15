@@ -1,9 +1,7 @@
 #ifndef USER_HPP
 #define USER_HPP
 
-#include <iostream>
-#include <fstream>
-#include <vector>
+
 #include "data.hpp"
 
 
@@ -26,6 +24,9 @@ class User
             Data::next_user_id += 1; 
             Data::rewrite_next_id();
         }
+        User(const uint32_t id, std::string nickname, std::string password) : 
+        id(id), nickname(nickname), password(password)
+        {}
 };
 
 

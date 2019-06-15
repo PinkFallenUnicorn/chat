@@ -1,12 +1,13 @@
 #include "data.hpp"
 
 
-std::string Data::filepath = "";
 uint64_t Data::next_chat_id = 0;
 uint32_t Data::next_user_id = 0;
 
 
-
+/*Function, which creates all server-needed directories/files
+warning: it removes all old folders named: "data", "users", "chats"
+and data/next_id file*/
 uint32_t Data::first_data_init()
 {
     system("rm -rf data");
@@ -21,7 +22,7 @@ uint32_t Data::first_data_init()
     file.open("data/next_id");
 
     if (!file.is_open()) {perror("open data/next_id"); exit(0); }
-    
+
     else 
     { file << "1\n1\n";}
     file.close();
@@ -32,10 +33,8 @@ uint32_t Data::first_data_init()
 
 uint32_t Data::data_init()
 {
-    filepath = "data/next_id";
-
     std::ifstream file;
-    file.open(filepath);
+    file.open("data/next_id");
 
     if (!file.is_open()) {perror("open data/next_id"); exit(0);}
     else 
@@ -53,7 +52,7 @@ uint32_t Data::data_init()
 uint32_t Data::rewrite_next_id()
 {
     std::ofstream file;
-    file.open(Data::filepath);
+    file.open("data/next_id");
 
     if (!file.is_open()) {perror("open next_id"); exit(0);}
 

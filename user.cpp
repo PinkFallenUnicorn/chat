@@ -13,9 +13,13 @@ uint32_t User::add_user_file()
     std::ofstream file;
     file.open(filepath);
     
-    std::string errortext = "error open user file user_id: " + std::to_string(id);
-    const char *errtext = errortext.c_str();
-    if (!file.is_open()) {perror(errtext); exit(0);}
+    if (!file.is_open()) 
+    {
+        std::string errortext = "error open user file user_id: " + std::to_string(id);
+        const char *errtext = errortext.c_str();
+        perror(errtext);
+        exit(0);
+    }
 
     else 
     { file << nickname << '\n' << password << '\n';}

@@ -1,17 +1,14 @@
 #include "chat.hpp"
 #include "data.hpp"
 #include "user.hpp"
+#include "server_data.hpp"
 
 int main()
 {
-    Data::first_data_init();
-    Data::data_init();
-    User asada {"oasodjaosd", "assadsaddas"};
-    User aasdsada {"oasosdjaosd", "assadsaddas"};
-    User asafda {"oasodjao1sd", "assadsaddas"};
-    User asddada {"oasodjasosd", "assadsaddas"};
-    User asasdada {"oagsodjaosd", "assadsaddas"};
-    Chat newchat {asada.id, aasdsada.id};
-    Chat::message msg {newchat, newchat.user1_id, newchat.user2_id, "ojsadajsdojasodjaosjdosajdoajodojsvbasdhosjdaosdhbfjiabds"};
+    //Data::first_data_init();
+    Server_data::server_data_init();
+    std::cout << Server_data::users[2].nickname << '\n';
+    std::cout << Server_data::chats[0].user2_id << '\n';
+
     return 0;
 }
