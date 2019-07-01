@@ -43,12 +43,12 @@ int main()
             close(listener);
             while (1)
             {
-                char buf[5048];
-                int32_t i = Net::receive(buf, sock);
-                std::cout << "buf: " << buf  << '\n' << "bufsize: " << buf.size() <<;
-                std::cout << "we are good" << '\n';
-
-                if (i >= 0)
+                std::string buf;
+                int32_t i = Net::receive(&buf, sock);
+                std::cout << "server_app.cpp: buf: " << buf  << '\n' << "server_app.cpp: bufsize: " << buf.size() << '\n';
+                std::cout << "server_app.cpp: we are good" << '\n';
+                
+                if (i >= 0)               
                     break;
             }
             close(sock);

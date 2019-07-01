@@ -29,6 +29,7 @@ int main()
             {
                 std::string message;
                 std::cin >> message;
+                std::cout << "client_app: message: " << message << "\nclientapp: message: size: " << message.size() << '\n';
                 Net::send_char(&message, sock);
                 break;
             }
