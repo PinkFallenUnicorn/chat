@@ -58,6 +58,20 @@ uint32_t Server_data::server_data_chats_init()
     return 0;
 }
 
+//Need rework users, chats using b_tree instead of vector i think
+uint32_t Server_data::find(std::string login, std::string password)
+{
+    for (size_t i = 0; i < users.size(); i++)
+    {
+        if (users[i].nickname == login)
+        {
+            if (users[i].password == password)
+                return 1;
+        }
+    }
+    return 0;
+}
+
 
 /*Function which read from datafiles all data and initialize it 
 as next_id variables/vector<User> users/vector<Chat> chats*/
@@ -66,4 +80,5 @@ uint32_t Server_data::server_data_init()
     Data::data_init();
     server_data_users_init();
     server_data_chats_init();
+    return 0;
 }
