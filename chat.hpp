@@ -15,6 +15,7 @@ class Chat
         Chat(const uint32_t user1_id, const uint32_t user2_id); 
         Chat(const uint32_t chat_id, const uint32_t user1_id, const uint32_t user2_id); 
         uint32_t new_message(const uint32_t sender_id, const uint32_t receiver_id, const std::string msg);
+
     private:
         struct message
         {

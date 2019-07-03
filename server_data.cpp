@@ -1,8 +1,8 @@
 #include "server_data.hpp"
 
-
-std::vector<User> Server_data::users = {};
-std::vector<Chat> Server_data::chats = {};
+User alfa_user{0 ,"nnnnnnnnnnnnnnnn", "nnnnnnnnnnnnnnn"};
+Tree <User> Server_data::users {alfa_user};
+std::vector <Chat> Server_data::chats = {};
 
 
 uint32_t Server_data::server_data_users_init()
@@ -25,7 +25,7 @@ uint32_t Server_data::server_data_users_init()
         file >> nickname;
         std::string password;
         file >> password;
-        users.push_back(User(i, nickname, password));
+        users.add(User(i, nickname, password));
         file.close();
     }
     return 0;
@@ -58,19 +58,6 @@ uint32_t Server_data::server_data_chats_init()
     return 0;
 }
 
-//Need rework users, chats using b_tree instead of vector i think
-uint32_t Server_data::find(std::string login, std::string password)
-{
-    for (size_t i = 0; i < users.size(); i++)
-    {
-        if (users[i].nickname == login)
-        {
-            if (users[i].password == password)
-                return 1;
-        }
-    }
-    return 0;
-}
 
 
 /*Function which read from datafiles all data and initialize it 
@@ -81,4 +68,19 @@ uint32_t Server_data::server_data_init()
     server_data_users_init();
     server_data_chats_init();
     return 0;
+}
+
+
+uint32_t Server_data::add_user(std::string nickname, std::string password)
+{
+    User user{nickname, password};
+    Server_data::users.add(user);
+}
+
+
+
+uint32_t Server_data::add_chat(const uint32_t user1_id, const uint32_t user2_id)
+{
+    Chat chat{user1_id, user2_id};
+    Server_data::chats.push_back(chat);
 }

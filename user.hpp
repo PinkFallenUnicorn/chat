@@ -27,6 +27,10 @@ class User
         User(const uint32_t id, std::string nickname, std::string password) : 
         id(id), nickname(nickname), password(password)
         {}
+
+        friend bool operator==(const User &left, const User &right);
+        friend bool operator<(const User &left, const User &right);
+        friend bool operator>(const User &left, const User &right);
 };
 
 

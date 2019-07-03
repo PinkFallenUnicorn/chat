@@ -27,3 +27,21 @@ uint32_t User::add_user_file()
     
     return 0;
 }
+
+
+bool operator==(const User &left, const User &right)
+{
+    return left.nickname == right.nickname;
+}
+
+
+bool operator<(const User &left, const User &right)
+{
+    return left.nickname < right.nickname;
+}
+
+
+bool operator>(const User &left, const User &right)
+{
+    return left.nickname > right.nickname;
+}

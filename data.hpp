@@ -10,11 +10,13 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include "b_tree.hpp"
 
 
 class Data
 {
     private:
+
     public:
         static uint64_t next_chat_id;
         static uint32_t next_user_id;

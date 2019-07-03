@@ -47,9 +47,10 @@ int main()
                 int32_t i = Net::receive(&buf, sock);
                 std::cout << "server_app.cpp: buf: " << buf  << '\n' << "server_app.cpp: bufsize: " << buf.size() << '\n';
                 std::cout << "server_app.cpp: we are good" << '\n';
-                
                 if (i >= 0)               
                     break;
+                
+
             }
             close(sock);
             _exit(0);

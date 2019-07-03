@@ -99,3 +99,4 @@ chat_id(Data::next_chat_id), user1_id(user1_id), user2_id(user2_id)
 Chat::Chat(const uint32_t chat_id,const uint32_t user1_id, const uint32_t user2_id) : 
 chat_id(chat_id), user1_id(user1_id), user2_id(user2_id)
 {}
+
