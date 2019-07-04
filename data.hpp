@@ -23,6 +23,7 @@ class Data
         static uint32_t data_init();
         static uint32_t first_data_init();
         static uint32_t rewrite_next_id();
+        static uint16_t split(std::string *str, std::string *left, std::string *right);
 
 };
 

@@ -62,3 +62,19 @@ uint32_t Data::rewrite_next_id()
     file.close();
     return 0;
 }
+
+
+
+uint16_t Data::split(std::string *str, std::string *left, std::string *right)
+{
+    for (size_t i = 0; i < str->size(); i++)
+    {
+        if (str->at(i) == '\n')
+        {
+            *left = std::string(*str, 0, i);
+            *right = std::string(*str, i+1);
+        }
+    }
+    
+    return 0;
+}
