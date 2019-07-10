@@ -12,9 +12,6 @@ int main()
 {
     int32_t sock, listener;
     sockaddr_in addr;
-    const unsigned int MAX_BUF_LENGTH = 4096;
-    std::vector<char> buffer(MAX_BUF_LENGTH); ;
-    int bytes_read;
 
     listener = socket(AF_INET, SOCK_STREAM, 0);
     if (listener < 0)

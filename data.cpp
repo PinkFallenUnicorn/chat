@@ -73,6 +73,7 @@ uint16_t Data::split(std::string *str, std::string *left, std::string *right)
         {
             *left = std::string(*str, 0, i);
             *right = std::string(*str, i+1);
+            return 0;
         }
     }
     

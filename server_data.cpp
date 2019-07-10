@@ -2,6 +2,8 @@
 
 User alfa_user{0 ,"nnnnnnnnnnnnnnnn", "nnnnnnnnnnnnnnn"};
 Tree <User> Server_data::users {alfa_user};
+User *pointeer = &alfa_user;
+std::vector <User *> Server_data::users_by_id = {pointeer};
 std::vector <Chat> Server_data::chats = {};
 
 
@@ -25,7 +27,10 @@ uint32_t Server_data::server_data_users_init()
         file >> nickname;
         std::string password;
         file >> password;
-        users.add(User(i, nickname, password));
+        User user{i, nickname, password};
+        users.add(user);
+        User *pointeer = &user;
+        users_by_id.push_back(pointeer);
         file.close();
     }
     return 0;
@@ -75,12 +80,37 @@ uint32_t Server_data::add_user(std::string nickname, std::string password)
 {
     User user{nickname, password};
     Server_data::users.add(user);
+    User *pointeer = &user;
+    if (users_by_id.size() == users_by_id.capacity())
+        users_by_id.reserve(1000);
+    users_by_id.push_back(pointeer);
+    return 0;
 }
 
 
 
 uint32_t Server_data::add_chat(const uint32_t user1_id, const uint32_t user2_id)
 {
+    if (chats.size() == chats.capacity())
+        chats.reserve(1000);
     Chat chat{user1_id, user2_id};
-    Server_data::chats.push_back(chat);
+    chats.push_back(chat);
+    return 0;
+}
+
+/*return 0 == success, return 1 == wrong login, return 2 == wrong pass */
+const int16_t Server_data::find(std::string login, std::string password)
+{
+    User tmpuser(0, login, password);
+    if (Server_data::users.search(tmpuser))
+    {
+        User *secondtmpuser;
+        users.get(tmpuser, secondtmpuser);
+        if (secondtmpuser->password == password)
+            return 0;
+        else
+            return 2;
+    }
+    else
+        return 1;
 }

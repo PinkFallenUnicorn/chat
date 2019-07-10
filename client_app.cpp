@@ -18,9 +18,9 @@ int main()
     if (connect(sock, (sockaddr *)&addr, sizeof(addr)) < 0)
     { perror("connect"); exit(2); }
 
-    int32_t i;
     while (1)
     {
+        int32_t i;
         std::cout << "Выберите действие:\n1. Авторизация\n2. Регистрация в системе" << '\n';
         std::cin >> i;
         if (i == 1)

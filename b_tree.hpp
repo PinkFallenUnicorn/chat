@@ -18,12 +18,12 @@ class Tree
 		int16_t size;
 		Node *root;
 		void _add(Node *root, T value, Node *node);
-		const Node _get(T value, Node *root);		
+		void _get(T value, T *_value, Node *root);		
         
 	public:
 		const bool _search(T value, Node *root);
 		const size_t getsize() { return this->size; }
-		const Node get(T value);
+		void get(T value, T *_value);
 		void add(T value);
 		const bool search( T value);
 		Tree(T value) : size(0)
@@ -75,36 +75,36 @@ void Tree<T>::add(T value)
 
 
 template <class T>
-const class Tree<T>::Node Tree<T>::_get(T value, Tree::Node *root)
+void Tree<T>::_get(T value, T *_value ,Tree::Node *root)
 {
-	if (value == root->data) return *root;
+	if (value == root->data) _value = &root->data;
 	else if (value < root->data) 
 	{
-		if (root->left) {_get(value, root->left); }
+		if (root->left) {_get(value, _value, root->left); }
 		else { std::cout << "There is no that value" << std::endl; }
 		
 	}
 	else if (value > root->data) 
 	{
-		if (root->right) {_get(value, root->right); }
+		if (root->right) {_get(value, _value, root->right); }
 		else { std::cout << "There is no that value" << std::endl; }	
 	}
 }
 
 
 template <class T>
-const class Tree<T>::Node Tree<T>::get(T value)
+void Tree<T>::get(T value, T *_value)
 {
 	if (!this->root) {std::cout << "Error, tree is empty" << std::endl; }
-	else if (value == this->root->data) return *root;
+	else if (value == this->root->data) _value = &root->data;
 	else if (value < this->root->data) 
 	{
-		if (this->root->left) {_get(value, this->root->left); }
+		if (this->root->left) {_get(value, _value, this->root->left); }
 		else { std::cout << "There is no that value" << std::endl; }
 	}
 	else if (value > this->root->data) 
 	{
-		if (this->root->right) {_get(value, this->root->right); }
+		if (this->root->right) {_get(value, _value, this->root->right); }
 		else { std::cout << "There is no that value" << std::endl; }	
 	}
 }
@@ -125,6 +125,7 @@ const bool Tree<T>::_search(T value, Node *root)
 		if (root->right) {_search(value, root->right); }
 		else return false;
 	}
+	return false;
 }
 
 
@@ -143,6 +144,7 @@ const bool Tree<T>::search(T value)
 		if (this->root->right) {_search(value, this->root->right); }
 		else return false;	
 	}
+	return false;
 }
 
 
