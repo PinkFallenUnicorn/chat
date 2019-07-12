@@ -58,6 +58,22 @@ uint32_t Chat::add_chat_to_userfile()
 }
 
 
+uint16_t Chat::other_user_id(uint32_t user_id)
+{
+    if (user1_id != user_id && user2_id != user_id)
+        throw "no that user in this chat error";
+
+    else if(user1_id == user_id)
+        return user2_id;
+
+    else
+        return user1_id;
+    
+    
+       
+}
+
+
 uint32_t Chat::add_message_file()
 {
     const std::string filepath = "chats/" + std::to_string(chat_id);

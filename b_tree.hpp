@@ -132,6 +132,7 @@ const bool Tree<T>::_search(T value, Node *root)
 template <class T>
 const bool Tree<T>::search(T value)
 {
+	st:
 	if (!this->root) {std::cout << "Error, tree is empty" << std::endl; }
 	else if (value == this->root->data) return true;
 	else if (value < this->root->data) 

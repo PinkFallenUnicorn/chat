@@ -67,6 +67,7 @@ uint32_t Data::rewrite_next_id()
 
 uint16_t Data::split(std::string *str, std::string *left, std::string *right)
 {
+    std::cout << "Data::split started" << '\n';
     for (size_t i = 0; i < str->size(); i++)
     {
         if (str->at(i) == '\n')
@@ -76,6 +77,7 @@ uint16_t Data::split(std::string *str, std::string *left, std::string *right)
             return 0;
         }
     }
+    std::cout << "Data::split finished" << '\n';
     
     return 0;
 }

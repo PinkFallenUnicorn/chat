@@ -94,6 +94,10 @@ uint32_t Server_data::add_chat(const uint32_t user1_id, const uint32_t user2_id)
     if (chats.size() == chats.capacity())
         chats.reserve(1000);
     Chat chat{user1_id, user2_id};
+    chat.user1_name = users_by_id[user1_id]->nickname;
+    chat.user2_name = users_by_id[user2_id]->nickname;
+    users_by_id[user1_id]->chats.push_back(chat.chat_id);
+    users_by_id[user2_id]->chats.push_back(chat.chat_id);
     chats.push_back(chat);
     return 0;
 }
@@ -101,16 +105,20 @@ uint32_t Server_data::add_chat(const uint32_t user1_id, const uint32_t user2_id)
 /*return 0 == success, return 1 == wrong login, return 2 == wrong pass */
 const int16_t Server_data::find(std::string login, std::string password)
 {
+    std::cout << "Server_data::find started" << '\n';
     User tmpuser(0, login, password);
+    int32_t i;
     if (Server_data::users.search(tmpuser))
     {
         User *secondtmpuser;
         users.get(tmpuser, secondtmpuser);
         if (secondtmpuser->password == password)
-            return 0;
+            i = 0;
         else
-            return 2;
+            i = 2;
     }
     else
-        return 1;
+        i = 1;
+    std::cout << "Server_data::find finished" << i << '\n';
+    return i;
 }

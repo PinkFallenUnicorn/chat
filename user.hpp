@@ -2,18 +2,17 @@
 #define USER_HPP
 
 
-#include "data.hpp"
+#include "chat.hpp"
 
 
 
 class User
-{
-    private:
-        uint32_t add_user_file();    
+{ 
     public:
         std::string nickname;
         std::string password;
         const uint32_t id;
+        std::vector<uint64_t> chats;
 
         static uint32_t add_chat(uint32_t user_id, uint64_t chat_id);
 
@@ -31,6 +30,9 @@ class User
         friend bool operator==(const User &left, const User &right);
         friend bool operator<(const User &left, const User &right);
         friend bool operator>(const User &left, const User &right);
+
+    private:
+        uint32_t add_user_file();   
 };
 
 
