@@ -112,7 +112,7 @@ uint16_t Client::cout_chats()
 
 uint16_t Client::login(int32_t sock, std::string login, std::string password)
 {
-    std::string request = "/log/" + login + password;
+    std::string request = "/log/" + login + '\n' + password;
     
     Net::send_char(&request, sock);
 
@@ -134,7 +134,7 @@ uint16_t Client::login(int32_t sock, std::string login, std::string password)
 
 uint16_t Client::sign_up(int32_t sock, std::string login, std::string password)
 {
-    std::string request = "/sgn/" + login + password;
+    std::string request = "/sgn/" + login + '\n' + password;
     
     Net::send_char(&request, sock);
 
@@ -177,20 +177,21 @@ uint16_t Client::message(int32_t sock, uint64_t chat_id, uint32_t sender_id, uin
 
 uint16_t Client::run()
 {
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0)
-        { perror("socket"); exit(1); }
-
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(3328);
-    addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-
-    if (connect(sock, (sockaddr *)&addr, sizeof(addr)) < 0)
-        { perror("connect"); exit(2); }
-
-
     while (1)
     {
+        sock = socket(AF_INET, SOCK_STREAM, 0);
+        if (sock < 0)
+            { perror("socket"); exit(1); }
+
+        addr.sin_family = AF_INET;
+        addr.sin_port = htons(3328);
+        addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+
+        if (connect(sock, (sockaddr *)&addr, sizeof(addr)) < 0)
+            { perror("connect"); exit(2); }
+
+
+
         int32_t i;
         std::cout << "Выберите действие:\n1. Авторизация\n2. Регистрация в системе" << '\n';
         std::cin >> i;

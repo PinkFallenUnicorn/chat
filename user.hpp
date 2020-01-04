@@ -30,6 +30,7 @@ class User
         friend bool operator==(const User &left, const User &right);
         friend bool operator<(const User &left, const User &right);
         friend bool operator>(const User &left, const User &right);
+        friend std::ostream& operator<<(std::ostream &out, const User &user);
 
     private:
         uint32_t add_user_file();   

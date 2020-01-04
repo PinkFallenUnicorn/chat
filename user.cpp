@@ -29,8 +29,17 @@ uint32_t User::add_user_file()
 }
 
 
+std::ostream& operator<<(std::ostream &out, const User &user)
+{
+    out << user.id << '\n' << user.nickname << '\n' << user.password << '\n';
+
+    return out;
+}
+
+
 bool operator==(const User &left, const User &right)
 {
+    std::cout << left.nickname << " " <<  left.nickname.size()  << '\n' << right.nickname << " " << right.nickname.size()  << '\n';
     return left.nickname == right.nickname;
 }
 
