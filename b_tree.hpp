@@ -16,136 +16,158 @@ class Tree
             {}
 		};
 		int16_t size;
-		Node *root;
-		void _add(Node *root, T value, Node *node);
-		void _get(T value, T *_value, Node *root);		
+		int32_t get(T value, T *_value, Node *ptr);		
+		void add(T value, Node *ptr);
+		const bool search(T value, Node *ptr);
+		void show(Node *ptr);
         
 	public:
-		const bool _search(T value, Node *root);
+		Node *root;
 		const size_t getsize() { return this->size; }
-		void get(T value, T *_value);
-		void add(T value);
-		const bool search( T value);
-		Tree(T value) : size(0)
+		int32_t get(T value, T *_value) { return(get(value, _value, root)); }
+		void add(T value) { add(value, root); }
+		const bool search(T value) { return(search(value, root)); }
+		void show() {return(show(root)); };
+		Tree() : size(0), root(nullptr)
 		{
-			Node node = Node(value);
-			this->root = &node;
 		}
 
 };
 
-
 template <class T>
-void Tree<T>::_add(Node *_root, T value, Node *node)
+void Tree<T>::add(T value, Node *ptr)
 {
-	std::cout << "used" << std::endl;
-	if (value < _root->data && _root->left)
-		_add(_root->left, value, node);
-	else if (value > _root->data && _root->right)
-		_add(_root->right, value, node);
-	else if(value < _root->data && !_root->left)
+	std::cout << "Tree::add started" << '\n';
+	if (root == nullptr)
 	{
-		_root->left = node;
-		this->size += 1;
+		size += 1;
+		Node *node = new Node{value};
+		ptr = node;
+		root = node;
 	}
-	else if (value > _root->data && !_root->right)
-	{
-		_root->right = node;
-		this->size += 1;
-	}
-}
 
-
-template <class T>
-void Tree<T>::add(T value)
-{	
-	Node *_root = this->root;
-	Node *node = new Node {value};
-	if (root == NULL)  { this->root = node; }
+	else if(value == ptr->data)
+		std::cout << "error, Tree::add: data = value" << '\n';	
 	
-	else if (value < _root->data && _root->left)
-		_add(_root->left, value, node);
-	else if (value > _root->data && _root->right)
-		_add(_root->right, value, node);
-	else if(value < _root->data && !_root->left)
-		_root->left = node;
-	else if (value > _root->data && !_root->right)
-		_root->right = node;
-}
-
-
-template <class T>
-void Tree<T>::_get(T value, T *_value ,Tree::Node *root)
-{
-	if (value == root->data) _value = &root->data;
-	else if (value < root->data) 
+	else if(value < ptr->data)
 	{
-		if (root->left) {_get(value, _value, root->left); }
-		else { std::cout << "There is no that value" << std::endl; }
+		if (ptr->left)
+			add(value, ptr->left);
 		
+		else
+		{
+			std::cout << "Tree::add newleftnode" << '\n';
+			size += 1;
+			Node *node = new Node{value};
+			ptr->left = node;
+		}
 	}
-	else if (value > root->data) 
-	{
-		if (root->right) {_get(value, _value, root->right); }
-		else { std::cout << "There is no that value" << std::endl; }	
-	}
-}
 
-
-template <class T>
-void Tree<T>::get(T value, T *_value)
-{
-	if (!this->root) {std::cout << "Error, tree is empty" << std::endl; }
-	else if (value == this->root->data) _value = &root->data;
-	else if (value < this->root->data) 
+	else if(value > ptr->data)
 	{
-		if (this->root->left) {_get(value, _value, this->root->left); }
-		else { std::cout << "There is no that value" << std::endl; }
-	}
-	else if (value > this->root->data) 
-	{
-		if (this->root->right) {_get(value, _value, this->root->right); }
-		else { std::cout << "There is no that value" << std::endl; }	
-	}
-}
-
-
-template <class T>
-const bool Tree<T>::_search(T value, Node *root)
-{
-	if (value == root->data) return true;
-	else if (value < root->data) 
-	{
-		if (root->left) {_search(value, root->left); }
-		else return false;
+		if (ptr->right)
+			add(value, ptr->right);
 		
+		else
+		{
+			std::cout << "Tree::add newrightnode" << '\n';
+			size += 1;
+			Node *node = new Node{value};
+			ptr->right = node;
+		}
 	}
-	else if (value > root->data) 
-	{
-		if (root->right) {_search(value, root->right); }
-		else return false;
-	}
-	return false;
+
+	std::cout << "Tree::add finished" << '\n';
+
 }
 
 
+
+
+
+
+
 template <class T>
-const bool Tree<T>::search(T value)
+int32_t Tree<T>::get(T value, T *_value, Node *ptr)
 {
-	st:
-	if (!this->root) {std::cout << "Error, tree is empty" << std::endl; }
-	else if (value == this->root->data) return true;
-	else if (value < this->root->data) 
+	std::cout << "Tree::get started" << '\n';
+	int answer = 0;
+
+	if (root != nullptr)
+
+	if(value == ptr->data)
 	{
-		if (this->root->left) {_search(value, this->root->left); }
-		else return false;
+		answer = 1;	
+		_value = &ptr->data;
 	}
-	else if (value > this->root->data) 
+
+	else if(value < ptr->data)
 	{
-		if (this->root->right) {_search(value, this->root->right); }
-		else return false;	
+		if (ptr->left)
+			answer = search(value, ptr->left);
 	}
-	return false;
+
+	else if(value > ptr->data)
+	{
+		if (ptr->right)
+			answer = search(value, ptr->right);
+	}
+
+	std::cout << "Tree::get finished" << '\n';
+	return answer;
+}
+
+
+
+
+
+template <class T>
+const bool Tree<T>::search(T value, Node *ptr)
+{
+	std::cout << "Tree::search started" << '\n';
+	bool answer = false;
+
+	if (root != nullptr)
+
+	if(value == ptr->data)
+		answer = true;	
+	
+	else if(value < ptr->data)
+	{
+		if (ptr->left)
+			answer = search(value, ptr->left);
+		std::cout << ptr->left << '\n';
+	}
+
+	else if(value > ptr->data)
+	{
+		if (ptr->right)
+			answer = search(value, ptr->right);
+	}
+
+	std::cout << "Tree::search finished" << '\n';
+	return answer;
+}
+
+template <class T>
+void Tree<T>::show(Node *ptr)
+{
+	std::cout << "Tree::show started" << '\n';
+	if (root == nullptr)
+	{
+		std::cout << "The tree is empty" << '\n';
+		return ;
+	}
+
+	if (ptr->left) show(ptr->left);
+
+	if (ptr)
+		std::cout << ptr->data << '\n';
+		
+	if (ptr-> right) show(ptr->right);
+	std::cout << "Tree::show finished" << '\n';
+	return ;
+	
 }
 
 
